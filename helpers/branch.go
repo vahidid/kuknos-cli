@@ -6,13 +6,15 @@ import (
 )
 
 func Checkout(target string) {
-	_, err := exec.Command("git", "checkout", target).Output()
+	// cmd, err := exec.Command("git", "checkout", target).Output()
 
-	if err != nil {
-		panic(err)
-	}
+	// if err != nil {
+	// 	panic(err)
+	// }
 
-	fmt.Printf("Checkout to %s\t", target)
+	// fmt.Printf("Checkout to %s\t", target)
+
+	RunCMD("git", "checkout", target)
 }
 
 func CreateBranch(name string) {

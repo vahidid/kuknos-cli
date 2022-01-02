@@ -29,7 +29,7 @@ func FeatureController(cmd *cobra.Command, args []string) {
 	case "start":
 		Start(branchName, "develop")
 	case "finish":
-		helpers.Checkout("master")
+		Finish(branchName, "develop", true)
 	case "push":
 		helpers.Checkout(branchName)
 	case "pull":

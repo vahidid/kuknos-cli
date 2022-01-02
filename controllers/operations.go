@@ -11,10 +11,11 @@ var operations = []string{"start", "finish", "push", "pull"}
 func ValidateOperations(op string) {
 	for _, operation := range operations {
 		if op == operation {
-			break
+			return
 		}
-		panic(fmt.Sprintf("Operation %s is not valid", "'"+op+"'"))
 	}
+
+	panic(fmt.Sprintf("Operation %s is not valid", "'"+op+"'"))
 }
 
 func Start(branchName string, baseBranch string) {
