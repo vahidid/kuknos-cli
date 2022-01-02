@@ -17,7 +17,6 @@ package cmd
 
 import (
 	"github.com/spf13/cobra"
-	"github.com/vahidid/kuknos-cli/controllers"
 )
 
 // gitCmd represents the git command
@@ -30,16 +29,17 @@ and usage of using your command. For example:
 Cobra is a CLI library for Go that empowers applications.
 This application is a tool to generate the needed files
 to quickly create a Cobra application.`,
-	Run: func(cmd *cobra.Command, args []string) {
-		switch args[0] {
-		case "feature":
-			controllers.FeatureController(cmd, args)
-		}
-	},
+	// Run: func(cmd *cobra.Command, args []string) {
+	// 	switch args[0] {
+	// 	case "feature":
+	// 		controllers.FeatureController(cmd, args)
+	// 	}
+	// },
 }
 
 func init() {
 	rootCmd.AddCommand(gitCmd)
+	gitCmd.AddCommand(featureCmd)
 
 	// Here you will define your flags and configuration settings.
 
@@ -50,4 +50,5 @@ func init() {
 	// Cobra supports local flags which will only run when this command
 	// is called directly, e.g.:
 	gitCmd.Flags().BoolP("mr", "", false, "create merge request")
+
 }

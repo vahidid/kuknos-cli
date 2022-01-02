@@ -10,8 +10,18 @@ import (
 )
 
 func FeatureController(cmd *cobra.Command, args []string) {
-	if len(args) <= 1 {
-		fmt.Println("You have to pass at least one parameter as branch name")
+
+	fmt.Println(args)
+	if len(args) < 1 {
+		fmt.Println("You have to pass at least one parameter as operation")
+		return
+	}
+	fmt.Println("You have passed operation: ", "'"+args[0]+"'")
+	ValidateOperations(args[0])
+
+	if len(args) < 2 {
+		fmt.Println("You have to pass at least one parameter as branch name after operation")
+		return
 	}
 
 	branchName := args[1]
