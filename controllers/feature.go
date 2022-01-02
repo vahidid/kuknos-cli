@@ -16,7 +16,6 @@ func FeatureController(cmd *cobra.Command, args []string) {
 		fmt.Println("You have to pass at least one parameter as operation")
 		return
 	}
-	fmt.Println("You have passed operation: ", "'"+args[0]+"'")
 	ValidateOperations(args[0])
 
 	if len(args) < 2 {
@@ -25,6 +24,17 @@ func FeatureController(cmd *cobra.Command, args []string) {
 	}
 
 	branchName := args[1]
+
+	switch args[0] {
+	case "start":
+		Start(branchName, "develop")
+	case "finish":
+		helpers.Checkout("master")
+	case "push":
+		helpers.Checkout(branchName)
+	case "pull":
+		helpers.Checkout(branchName)
+	}
 
 	branchCommand := exec.Command("git", "branch")
 	output, err := branchCommand.Output()

@@ -27,11 +27,11 @@ func Start(branchName string, baseBranch string) {
 	fmt.Println("You are now on branch: " + branchName)
 }
 
-func Finish(branchName string, targetBranch string) {
+func Finish(branchName string, targetBranch string, mr bool) {
 	fmt.Println("Finish Branch with name: " + branchName)
 
 	helpers.Checkout(targetBranch)
-	helpers.MergeBranch(branchName, targetBranch)
+	helpers.MergeRequest(branchName, targetBranch)
 
 	fmt.Println("You are now on branch: master")
 }
