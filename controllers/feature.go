@@ -25,14 +25,16 @@ func FeatureController(cmd *cobra.Command, args []string) {
 
 	branches := helpers.SplitStringByByteArray(output, " ")
 
-	k, exists := helpers.FindInStringSlice(branches, branchName)
+	exists := helpers.FindInStringSlice(branches, branchName)
+	fmt.Println(branches[3])
+	fmt.Println(exists)
 
-	if exists {
-		helpers.MergeBranch(branches[k], "develop")
-		fmt.Printf("Successfully closed %s branch", branches[k])
-	} else {
-		helpers.CreateBranch(branchName)
-		fmt.Printf("Successfully created %s branch", branchName)
-	}
+	// if exists {
+	// 	helpers.MergeBranch(branchName, "develop")
+	// 	fmt.Printf("Successfully closed %s branch", branchName)
+	// } else {
+	// 	helpers.CreateBranch(branchName)
+	// 	fmt.Printf("Successfully created %s branch", branchName)
+	// }
 
 }

@@ -16,6 +16,7 @@ func Checkout(target string) {
 }
 
 func CreateBranch(name string) {
+
 	_, err := exec.Command("git", "branch", name).Output()
 
 	if err != nil {
