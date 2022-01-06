@@ -18,6 +18,7 @@ package cmd
 import (
 	"fmt"
 	"os"
+
 	"github.com/spf13/cobra"
 
 	"github.com/spf13/viper"
@@ -57,23 +58,24 @@ func init() {
 
 	// Cobra also supports local flags, which will only run
 	// when this action is called directly.
-	rootCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
 }
 
 // initConfig reads in config file and ENV variables if set.
 func initConfig() {
+	// fmt.Println("initConfig", )
 	if cfgFile != "" {
 		// Use config file from the flag.
 		viper.SetConfigFile(cfgFile)
 	} else {
 		// Find home directory.
-		home, err := os.UserHomeDir()
+		// home, err := os.UserHomeDir()
+		dir, err := os.Getwd()
 		cobra.CheckErr(err)
 
 		// Search config in home directory with name ".kuknos-cli" (without extension).
-		viper.AddConfigPath(home)
+		viper.AddConfigPath(dir)
 		viper.SetConfigType("yaml")
-		viper.SetConfigName(".kuknos-cli")
+		viper.SetConfigName(".kuknos")
 	}
 
 	viper.AutomaticEnv() // read in environment variables that match
