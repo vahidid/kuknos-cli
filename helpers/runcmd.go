@@ -2,7 +2,6 @@ package helpers
 
 import (
 	"bytes"
-	"fmt"
 	"os/exec"
 )
 
@@ -17,6 +16,6 @@ func RunCMD(name string, arg ...string) string {
 		// fmt.Println(fmt.Sprint(err) + ": " + stderr.String())
 		panic(stderr.String())
 	}
-	fmt.Println(out.String())
+	// fmt.Println(out.String())
 	return out.String()
 }
