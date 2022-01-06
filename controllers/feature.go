@@ -2,59 +2,42 @@ package controllers
 
 import (
 	"fmt"
-	"log"
-	"os/exec"
+	"os"
 
 	"github.com/spf13/cobra"
+	"github.com/spf13/viper"
 	"github.com/vahidid/kuknos-cli/helpers"
 )
 
 func FeatureController(cmd *cobra.Command, args []string) {
 
-	fmt.Println(args)
-	if len(args) < 1 {
-		fmt.Println("You have to pass at least one parameter as operation")
+	if err := viper.ReadInConfig(); err != nil {
+		fmt.Fprintln(os.Stderr, "Kuknos git tool not initialized! use 'kuknos git init' first")
 		return
 	}
+
+	// kuknos git feature <operation-name> <feature-name>
+
+	// Validation first argument is operation name
+	helpers.ValidationArgs(args, 1)
+
 	ValidateOperations(args[0])
 
-	if len(args) < 2 {
-		fmt.Println("You have to pass at least one parameter as branch name after operation")
-		return
-	}
+	// Validation second argument is feature name
+	helpers.ValidationArgs(args, 2)
 
 	branchName := args[1]
+	developBranch := fmt.Sprint(viper.Get("developbranch"))
 
 	switch args[0] {
 	case "start":
-		Start(branchName, "develop")
+		Start(branchName, developBranch)
 	case "finish":
-		Finish(branchName, "develop", true)
+		Finish(branchName, developBranch, true)
 	case "push":
 		helpers.Checkout(branchName)
 	case "pull":
 		helpers.Checkout(branchName)
 	}
-
-	branchCommand := exec.Command("git", "branch")
-	output, err := branchCommand.Output()
-	if err != nil {
-		log.Fatal(err)
-		return
-	}
-
-	branches := helpers.SplitStringByByteArray(output, " ")
-
-	exists := helpers.FindInStringSlice(branches, branchName)
-	fmt.Println(branches[3])
-	fmt.Println(exists)
-
-	// if exists {
-	// 	helpers.MergeBranch(branchName, "develop")
-	// 	fmt.Printf("Successfully closed %s branch", branchName)
-	// } else {
-	// 	helpers.CreateBranch(branchName)
-	// 	fmt.Printf("Successfully created %s branch", branchName)
-	// }
 
 }

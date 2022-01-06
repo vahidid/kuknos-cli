@@ -19,13 +19,13 @@ func ValidateOperations(op string) {
 }
 
 func Start(branchName string, baseBranch string) {
-	fmt.Println("Start Branch with name: " + branchName)
+	fmt.Println("Start Branch with name: " + baseBranch + "/" + branchName)
 
 	helpers.Checkout(baseBranch)
-	helpers.CreateBranch(branchName)
-	helpers.Checkout(branchName)
+	helpers.CreateBranch(baseBranch + "/" + branchName)
+	helpers.Checkout(baseBranch + "/" + branchName)
 
-	fmt.Println("You are now on branch: " + branchName)
+	fmt.Println("You are now on branch: " + baseBranch + branchName)
 }
 
 func Finish(branchName string, targetBranch string, mr bool) {

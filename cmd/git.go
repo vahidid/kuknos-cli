@@ -40,7 +40,8 @@ to quickly create a Cobra application.`,
 func init() {
 	rootCmd.AddCommand(gitCmd)
 	gitCmd.AddCommand(initCmd)
-	// gitCmd.AddCommand(featureCmd)
+
+	gitCmd.AddCommand(featureCmd)
 
 	// Here you will define your flags and configuration settings.
 

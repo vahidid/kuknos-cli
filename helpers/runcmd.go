@@ -6,7 +6,7 @@ import (
 	"os/exec"
 )
 
-func RunCMD(name string, arg ...string) {
+func RunCMD(name string, arg ...string) string {
 	cmd := exec.Command(name, arg...)
 	var out bytes.Buffer
 	var stderr bytes.Buffer
@@ -17,5 +17,6 @@ func RunCMD(name string, arg ...string) {
 		// fmt.Println(fmt.Sprint(err) + ": " + stderr.String())
 		panic(stderr.String())
 	}
-	fmt.Println("Result: " + out.String())
+	fmt.Println(out.String())
+	return out.String()
 }

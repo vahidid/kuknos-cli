@@ -2,7 +2,12 @@ package helpers
 
 import (
 	"fmt"
+	"strings"
 )
+
+func ExistsBranch(name string) bool {
+	return strings.Contains(RunCMD("git", "branch"), name)
+}
 
 func Checkout(target string) {
 	RunCMD("git", "checkout", target)
