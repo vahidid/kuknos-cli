@@ -27,11 +27,45 @@ func MergeBranch(source string, target string, mr bool) {
 	fmt.Printf("Branch %s successfully merged into %s", source, target)
 }
 
-func MergeRequest(source string, target string) {
+func MergeRequest(source, target, title, description, label string) {
 
-	Checkout(target)
+	// Checkout(target)
+	// commandString := "push " + source + " -o merge_request.create"
+	// commandString += " -o merge_request.target=\"" + target + "\""
+	// commandString += " -o merge_request.title=\"" + title + "\""
+	// commandString += " -o merge_request.description=\"" + description + "\""
+	// commandString += " -o merge_request.label=\"" + label + "\""
 
-	fmt.Println(RunCMD("git", "push", "origin-demo", source, "-o", "merge_request.create"))
+	// Fetch branches
+	fmt.Println(Fetch())
 
+	branches := RunCMD("git", "branch", "-a")
+	if !strings.Contains(branches, "remotes/origin/"+target) {
+		Push(target, "origin")
+	}
+
+	args := []string{
+		"push",
+		"origin",
+		source,
+		"-o",
+		"merge_request.create",
+		"-o",
+		"merge_request.target=" + target,
+		"-o merge_request.title=\"" + title + "\"",
+		"-o merge_request.description=\"" + description + "\"",
+		"-o merge_request.label=" + label,
+	}
+
+	fmt.Println(RunCMD("git", args...))
 	fmt.Printf("Branch %s successfully merged into %s", source, target)
+}
+
+func Push(branch, remote string) {
+
+	fmt.Println(RunCMD("git", "push", "--set-upstream", remote, branch))
+}
+
+func Fetch() string {
+	return RunCMD("git", "fetch")
 }

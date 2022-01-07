@@ -1,7 +1,10 @@
 package controllers
 
 import (
+	"bufio"
 	"fmt"
+	"os"
+	"strings"
 
 	"github.com/vahidid/kuknos-cli/helpers"
 )
@@ -19,20 +22,37 @@ func ValidateOperations(op string) {
 }
 
 func Start(branchName string, baseBranch string) {
-	fmt.Println("Start Branch with name: " + baseBranch + "/" + branchName)
+	fmt.Println("Start Branch with name: " + branchName)
 
 	helpers.Checkout(baseBranch)
-	helpers.CreateBranch(baseBranch + "/" + branchName)
-	helpers.Checkout(baseBranch + "/" + branchName)
+	helpers.CreateBranch(branchName)
+	helpers.Checkout(branchName)
 
-	fmt.Println("You are now on branch: " + baseBranch + branchName)
+	fmt.Println("You are now on branch: " + branchName)
 }
 
-func Finish(branchName string, targetBranch string, mr bool) {
-	fmt.Println("Finish Branch with name: " + branchName)
+func Finish(branchName, targetBranch, label string) {
+	fmt.Println("Finish Branch : " + branchName)
 
-	helpers.Checkout(targetBranch)
-	helpers.MergeRequest(branchName, targetBranch)
+	reader := bufio.NewReader(os.Stdin)
+	fmt.Print("Are you sure you want to finish this branch? (Y/n) ")
+	ans, _ := reader.ReadString('\n')
+	ans = strings.TrimSpace(ans)
 
-	fmt.Println("You are now on branch: master")
+	if ans == "Y" || ans == "y" || ans == "" {
+		// Get merge request title
+		fmt.Print("Enter merge request title: ")
+		title, _ := reader.ReadString('\n')
+
+		// Get merge request description
+		fmt.Print("Enter merge request description: ")
+		description, _ := reader.ReadString('\n')
+
+		// helpers.Checkout(targetBranch)
+		helpers.MergeRequest(branchName, targetBranch, strings.TrimSpace(title), strings.TrimSpace(description), label)
+	}
+
+	// helpers.Checkout(targetBranch)
+
+	fmt.Println("You are now on branch: " + targetBranch)
 }

@@ -27,13 +27,20 @@ func FeatureController(cmd *cobra.Command, args []string) {
 	helpers.ValidationArgs(args, 2)
 
 	branchName := args[1]
-	developBranch := fmt.Sprint(viper.Get("developbranch"))
+	featureBranch := fmt.Sprint(viper.Get("feature"))
+	developBranch := fmt.Sprint(viper.Get("develop"))
+
+	// Check if develop branch is not exists
+	if !helpers.ExistsBranch(developBranch) {
+		fmt.Fprintln(os.Stderr, "Develop branch not exists!")
+		return
+	}
 
 	switch args[0] {
 	case "start":
-		Start(branchName, developBranch)
+		Start(featureBranch+"/"+branchName, developBranch)
 	case "finish":
-		Finish(branchName, developBranch, true)
+		Finish(featureBranch+"/"+branchName, developBranch, "Feature")
 	case "push":
 		helpers.Checkout(branchName)
 	case "pull":
