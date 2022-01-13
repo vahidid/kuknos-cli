@@ -42,9 +42,9 @@ func FeatureController(cmd *cobra.Command, args []string) {
 	case "finish":
 		Finish(featureBranch+"/"+branchName, developBranch, "Feature")
 	case "push":
-		helpers.Checkout(branchName)
+		helpers.Push(featureBranch+"/"+branchName, "origin")
 	case "pull":
-		helpers.Checkout(branchName)
+		helpers.Pull(featureBranch+"/"+branchName, "origin")
 	}
 
 }

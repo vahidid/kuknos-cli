@@ -41,8 +41,8 @@ func ImprovementController(cmd *cobra.Command, args []string) {
 	case "finish":
 		Finish(improvementBranch+"/"+branchName, developBranch, "Improvement")
 	case "push":
-		helpers.Checkout(branchName)
+		helpers.Push(improvementBranch+"/"+branchName, "origin")
 	case "pull":
-		helpers.Checkout(branchName)
+		helpers.Pull(improvementBranch+"/"+branchName, "origin")
 	}
 }

@@ -9,42 +9,44 @@ import (
 	"github.com/vahidid/kuknos-cli/helpers"
 )
 
-func BugfixController(cmd *cobra.Command, args []string) {
+func ReleaseController(cmd *cobra.Command, args []string) {
 
 	if err := viper.ReadInConfig(); err != nil {
 		fmt.Fprintln(os.Stderr, "Kuknos git tool not initialized! use 'kuknos git init' first")
 		return
 	}
 
-	// kuknos git feature <operation-name> <feature-name>
+	// kuknos git release <operation-name> <release-name>
 
 	// Validation first argument is operation name
 	helpers.ValidationArgs(args, 1)
 
 	ValidateOperations(args[0])
 
-	// Validation second argument is feature name
+	// Validation second argument is release name
 	helpers.ValidationArgs(args, 2)
 
 	branchName := args[1]
-	bugfixBranch := fmt.Sprint(viper.Get("bugfix"))
-	developBranch := fmt.Sprint(viper.Get("develop"))
+	releaseBranch := fmt.Sprint(viper.Get("release"))
+	mainBranch := fmt.Sprint(viper.Get("main"))
 
 	// Check if develop branch is not exists
-	if !helpers.ExistsBranch(developBranch) {
+	if !helpers.ExistsBranch(mainBranch) {
 		fmt.Fprintln(os.Stderr, "Develop branch not exists!")
 		return
 	}
 
 	switch args[0] {
 	case "start":
-		Start(bugfixBranch+"/"+branchName, developBranch)
+		Start(releaseBranch+"/"+branchName, mainBranch)
 	case "finish":
-		Finish(bugfixBranch+"/"+branchName, developBranch, "Bugfix")
+		Finish(releaseBranch+"/"+branchName, mainBranch, "Release")
+		helpers.CreateTag(branchName)
+		helpers.Push(branchName, "origin")
 	case "push":
-		helpers.Push(bugfixBranch+"/"+branchName, "origin")
+		helpers.Push(releaseBranch+"/"+branchName, "origin")
 	case "pull":
-		helpers.Pull(bugfixBranch+"/"+branchName, "origin")
+		helpers.Pull(releaseBranch+"/"+branchName, "origin")
 	}
 
 }

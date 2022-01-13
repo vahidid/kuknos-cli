@@ -66,6 +66,11 @@ func Push(branch, remote string) {
 	fmt.Println(RunCMD("git", "push", "--set-upstream", remote, branch))
 }
 
+func Pull(branch, remote string) {
+
+	fmt.Println(RunCMD("git", "pull", remote, branch))
+}
+
 func Fetch() string {
 	return RunCMD("git", "fetch")
 }

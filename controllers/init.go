@@ -94,6 +94,7 @@ func InitController(cmd *cobra.Command, args []string) {
 	viper.Set("bugfix", bugfixPrefix)
 	viper.Set("hotfix", hotfixPrefix)
 	viper.Set("improvement", improvementPrefix)
+	viper.Set("release", releasePrefix)
 
 	err := viper.SafeWriteConfig()
 

@@ -42,9 +42,9 @@ func HotfixController(cmd *cobra.Command, args []string) {
 	case "finish":
 		Finish(hotfixBranch+"/"+branchName, mainBranch, "Hotfix")
 	case "push":
-		helpers.Checkout(branchName)
+		helpers.Push(hotfixBranch+"/"+branchName, "origin")
 	case "pull":
-		helpers.Checkout(branchName)
+		helpers.Pull(hotfixBranch+"/"+branchName, "origin")
 	}
 
 }
