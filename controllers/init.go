@@ -19,7 +19,8 @@ func InitController(cmd *cobra.Command, args []string) {
 	}
 
 	// Main Branch [default: master]
-	fmt.Println("Initilizing...")
+	// fmt.Println("Initilizing...")
+	helpers.IntroScreen()
 	reader := bufio.NewReader(os.Stdin)
 	fmt.Print("Enter main branch name [default: master]: ")
 	mainBranch, _ := reader.ReadString('\n')
