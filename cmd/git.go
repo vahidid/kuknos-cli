@@ -42,6 +42,7 @@ func init() {
 	gitCmd.AddCommand(initCmd)
 
 	gitCmd.AddCommand(featureCmd)
+	gitCmd.AddCommand(bugfixCmd)
 
 	// Here you will define your flags and configuration settings.
 

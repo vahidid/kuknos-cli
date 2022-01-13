@@ -52,7 +52,7 @@ func Finish(branchName, targetBranch, label string) {
 		helpers.MergeRequest(branchName, targetBranch, strings.TrimSpace(title), strings.TrimSpace(description), label)
 	}
 
-	// helpers.Checkout(targetBranch)
+	helpers.Checkout(targetBranch)
 
 	fmt.Println("You are now on branch: " + targetBranch)
 }
