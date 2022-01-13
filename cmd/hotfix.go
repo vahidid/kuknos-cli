@@ -7,8 +7,8 @@ import (
 
 var hotfixCmd = &cobra.Command{
 	Use:   "hotfix",
-	Short: "Work with features branch",
-	Long:  `A longer description that spans multiple lines and likely contains examples`,
+	Short: "Work with hotfix branch",
+	Long:  `Use it for fix emergency bugs in production!`,
 	Run:   controllers.HotfixController,
 }
 

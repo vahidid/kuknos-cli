@@ -8,7 +8,7 @@ import (
 var featureCmd = &cobra.Command{
 	Use:   "feature",
 	Short: "Work with features branch",
-	Long:  `A longer description that spans multiple lines and likely contains examples`,
+	Long:  `Use it for adding new feature like add new page, new form, etc.`,
 	Run:   controllers.FeatureController,
 }
 

@@ -7,7 +7,7 @@ import (
 
 var releaseCmd = &cobra.Command{
 	Use:   "release",
-	Short: "A brief description of your command",
-	Long:  `A longer description that spans multiple lines and likely contains examples`,
+	Short: "Work with release branch",
+	Long:  `Release branches uses for publishing new version of your application! and so documenting or clear logs and clean up comments or anything like these!`,
 	Run:   controllers.ReleaseController,
 }

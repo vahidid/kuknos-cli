@@ -7,8 +7,8 @@ import (
 
 var bugfixCmd = &cobra.Command{
 	Use:   "bugfix",
-	Short: "Work with features branch",
-	Long:  `A longer description that spans multiple lines and likely contains examples`,
+	Short: "Work with bugfix branch",
+	Long:  `Create a new bugfix branch for debugging sprints!`,
 	Run:   controllers.BugfixController,
 }
 

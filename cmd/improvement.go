@@ -8,7 +8,7 @@ import (
 var improvementCmd = &cobra.Command{
 	Use:   "improvement",
 	Short: "Work with improvements branch",
-	Long:  `A longer description that spans multiple lines and likely contains examples`,
+	Long:  `Use it for improve existing features and maybe refactor or change styles and UI!`,
 	Run:   controllers.ImprovementController,
 }
 
