@@ -43,7 +43,7 @@ func init() {
 
 	gitCmd.AddCommand(featureCmd)
 	gitCmd.AddCommand(bugfixCmd)
-
+	gitCmd.AddCommand(hotfixCmd)
 	// Here you will define your flags and configuration settings.
 
 	// Cobra supports Persistent Flags which will work for this command
