@@ -1,5 +1,5 @@
 /*
-Copyright © 2021 NAME HERE <EMAIL ADDRESS>
+Copyright © 2021 Vahid Hasani <v.hasani@kuknos.ir>
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -15,7 +15,9 @@ limitations under the License.
 */
 package main
 
-import "github.com/vahidid/kuknos-cli/cmd"
+import (
+	"github.com/vahidid/kuknos-cli/cmd"
+)
 
 func main() {
 	cmd.Execute()

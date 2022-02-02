@@ -2,6 +2,7 @@ package helpers
 
 import (
 	"bytes"
+	"os"
 	"os/exec"
 
 	"github.com/pterm/pterm"
@@ -24,7 +25,8 @@ func RunCMD(name string, arg ...string) string {
 		// fmt.Println(fmt.Sprint(err) + ": " + stderr.String())
 		pterm.Error.Println(stderr.String())
 		// return ""
-		panic(stderr.String())
+		os.Exit(1)
+		// panic(stderr.String())
 	}
 	// fmt.Println(out.String())
 	return out.String()
